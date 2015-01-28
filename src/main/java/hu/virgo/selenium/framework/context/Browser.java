@@ -3,6 +3,8 @@ package hu.virgo.selenium.framework.context;
 import java.net.URL;
 
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -15,6 +17,9 @@ public class Browser {
 
 	private BrowserType type;
 	private URL hub;
+	private int windowWidth = 1366;
+	private int windowHeigth = 768;
+	private boolean windowMaximize = false;
 
 	public Browser(String type, URL hub) {
 		this.type = BrowserType.valueOf(type.toUpperCase());
@@ -33,7 +38,23 @@ public class Browser {
 			driver = getLocalDriver();
 		}
 
+		if (windowMaximize) {
+			driver.manage().window().maximize();
+		} else {
+			driver.manage().window().setPosition(new Point(0, 0));
+			driver.manage().window().setSize(new Dimension(windowWidth, windowHeigth));
+		}
+
 		return driver;
+	}
+
+	public void setWindowMaximize(boolean windowMaximize) {
+		this.windowMaximize = windowMaximize;
+	}
+
+	public void setWindowDimensions(int windowWidth, int windowHeigth) {
+		this.windowWidth = windowWidth;
+		this.windowHeigth = windowHeigth;
 	}
 
 	private WebDriver getRemoteDriver() {

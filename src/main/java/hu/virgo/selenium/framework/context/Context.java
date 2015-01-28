@@ -58,16 +58,26 @@ public class Context {
 	private Browser initBrowser(Properties properties) {
 		String browserName = properties.getProperty("browser");
 		String hubStr = properties.getProperty("browser.hub");
+		boolean windowMaximize = Boolean.parseBoolean(properties.getProperty("browser.windows.maximize", "false"));
+		int windowWidth = Integer.parseInt(properties.getProperty("browser.window.width", "1366"));
+		int windowHeigth = Integer.parseInt(properties.getProperty("browser.window.heigth", "768"));
+
+		Browser browser;
 
 		if (hubStr != null) {
 			try {
 				URL hub = new URL(hubStr);
-				return new Browser(browserName, hub);
+				browser = new Browser(browserName, hub);
 			} catch (MalformedURLException e) {
 				throw new IllegalArgumentException(e);
 			}
 		} else {
-			return new Browser(browserName);
+			browser = new Browser(browserName);
 		}
+
+		browser.setWindowMaximize(windowMaximize);
+		browser.setWindowDimensions(windowWidth, windowHeigth);
+
+		return browser;
 	}
 }
