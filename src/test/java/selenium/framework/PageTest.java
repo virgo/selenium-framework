@@ -1,8 +1,8 @@
 package selenium.framework;
 
 import hu.virgo.selenium.framework.JUnitTestTemplate;
-import hu.virgo.selenium.framework.Page;
-import hu.virgo.selenium.framework.verify.ElementVerifier;
+import hu.virgo.selenium.framework.page.Page;
+import hu.virgo.selenium.framework.page.verify.ElementVerifier;
 
 import org.junit.Rule;
 import org.junit.Test;

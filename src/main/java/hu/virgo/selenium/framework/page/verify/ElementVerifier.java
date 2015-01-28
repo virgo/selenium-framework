@@ -1,4 +1,4 @@
-package hu.virgo.selenium.framework.verify;
+package hu.virgo.selenium.framework.page.verify;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -26,11 +26,8 @@ public class ElementVerifier implements PageVerifier {
 		try {
 			wait.until(ExpectedConditions.elementToBeClickable(element));
 		} catch (Exception e) {
-			throw new NoSuchElementException(
-					this.getClass().toString()
-							+ " the page cannot be loaded because the following elements could not be found:  "
-							+ element.getClass().getName() + " "
-							+ element.toString());
+			throw new NoSuchElementException(this.getClass().toString() + " the page cannot be loaded because the following elements could not be found:  " + element.getClass().getName() + " "
+					+ element.toString());
 		}
 	}
 }

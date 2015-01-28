@@ -16,7 +16,6 @@ public class Context {
 	private String sutPropertiesFileName;
 	private Properties properties;
 	private Browser browser;
-
 	public SystemUnderTest sut;
 
 	public Context() {

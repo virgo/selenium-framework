@@ -1,7 +1,7 @@
-package hu.virgo.selenium.framework;
+package hu.virgo.selenium.framework.page;
 
-import hu.virgo.selenium.framework.verify.ElementVerifier;
-import hu.virgo.selenium.framework.verify.PageVerifier;
+import hu.virgo.selenium.framework.page.verify.ElementVerifier;
+import hu.virgo.selenium.framework.page.verify.PageVerifier;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

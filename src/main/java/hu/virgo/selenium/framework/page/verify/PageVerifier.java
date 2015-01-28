@@ -1,4 +1,4 @@
-package hu.virgo.selenium.framework.verify;
+package hu.virgo.selenium.framework.page.verify;
 
 import org.openqa.selenium.WebDriver;
 
