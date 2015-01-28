@@ -46,8 +46,9 @@ public class Context {
 	}
 
 	private SystemUnderTest initSut(Properties properties) {
-		String t = properties.getProperty("sut.type");
-		SutType type = SutType.valueOf(t.toUpperCase());
+		String sutType = properties.getProperty("sut.type");
+		sutType = sutType.trim().toUpperCase();
+		SutType type = SutType.valueOf(sutType);
 
 		String baseUrl = properties.getProperty("sut.baseUrl");
 		String adminBaseUrl = properties.getProperty("sut.admin.baseUrl");
