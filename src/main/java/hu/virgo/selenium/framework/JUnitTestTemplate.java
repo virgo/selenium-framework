@@ -9,8 +9,9 @@ import org.openqa.selenium.WebDriver;
 
 public class JUnitTestTemplate {
 
-	protected WebDriver driver;
 	protected static Context context;
+	protected WebDriver driver;
+	protected Utils utils;
 
 	@BeforeClass
 	public static void initContext() {
@@ -20,6 +21,7 @@ public class JUnitTestTemplate {
 	@Before
 	public void initTest() {
 		driver = context.getNewDriver();
+		utils = new Utils(driver);
 	}
 
 	@After
