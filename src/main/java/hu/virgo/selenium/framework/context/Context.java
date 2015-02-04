@@ -65,8 +65,9 @@ public class Context {
 	}
 
 	private Browser initBrowser(Properties properties) {
-		String browserName = properties.getProperty("browser");
+		String browserType = properties.getProperty("browser");
 		String hubStr = properties.getProperty("browser.hub");
+		String firefoxProfile = properties.getProperty("browser.firefoxProfilePath");
 		boolean windowMaximize = Boolean.parseBoolean(properties.getProperty("browser.windows.maximize", "false"));
 		int windowWidth = Integer.parseInt(properties.getProperty("browser.window.width", "1366"));
 		int windowHeigth = Integer.parseInt(properties.getProperty("browser.window.heigth", "768"));
@@ -76,13 +77,16 @@ public class Context {
 		if (hubStr != null) {
 			try {
 				URL hub = new URL(hubStr);
-				browser = new Browser(browserName, hub);
+				browser = new Browser(browserType, hub);
 			} catch (MalformedURLException e) {
 				throw new IllegalArgumentException(e);
 			}
 		} else {
-			browser = new Browser(browserName);
+			browser = new Browser(browserType);
 		}
+
+		if (firefoxProfile != null)
+			browser.setFirefoxProfile(firefoxProfile);
 
 		browser.setWindowMaximize(windowMaximize);
 		browser.setWindowDimensions(windowWidth, windowHeigth);

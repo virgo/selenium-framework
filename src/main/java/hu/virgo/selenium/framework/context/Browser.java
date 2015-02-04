@@ -1,13 +1,14 @@
 package hu.virgo.selenium.framework.context;
 
+import java.io.File;
 import java.net.URL;
 
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.LocalFileDetector;
@@ -20,6 +21,7 @@ public class Browser {
 	private int windowWidth = 1366;
 	private int windowHeigth = 768;
 	private boolean windowMaximize = false;
+	private FirefoxProfile firefoxProfile;
 
 	public Browser(String type, URL hub) {
 		this.type = BrowserType.valueOf(type.toUpperCase());
@@ -57,18 +59,28 @@ public class Browser {
 		this.windowHeigth = windowHeigth;
 	}
 
+	public void setFirefoxProfile(String profileParam) {
+		File profileDir = new File(profileParam);
+		this.firefoxProfile = new FirefoxProfile(profileDir);
+	}
+
 	private WebDriver getRemoteDriver() {
-		Capabilities capabilities;
+		DesiredCapabilities capabilities;
 		switch (this.type) {
 		case FIREFOX:
 			capabilities = DesiredCapabilities.firefox();
+			if (this.firefoxProfile != null)
+				capabilities.setCapability(FirefoxDriver.PROFILE, this.firefoxProfile);
 			break;
 		case IE:
 			capabilities = DesiredCapabilities.internetExplorer();
+			break;
 		case CHROME:
 			capabilities = DesiredCapabilities.chrome();
+			break;
 		default:
 			capabilities = DesiredCapabilities.firefox();
+			break;
 		}
 
 		RemoteWebDriver driver;
@@ -81,7 +93,11 @@ public class Browser {
 	private WebDriver getLocalDriver() {
 		switch (this.type) {
 		case FIREFOX:
-			return new FirefoxDriver();
+			if (this.firefoxProfile != null) {
+				return new FirefoxDriver(this.firefoxProfile);
+			} else {
+				return new FirefoxDriver();
+			}
 		case IE:
 			return new InternetExplorerDriver();
 		case CHROME:
