@@ -1,7 +1,7 @@
 package hu.virgo.selenium.framework;
 
-import hu.virgo.selenium.debug.DebugDataStore;
 import hu.virgo.selenium.framework.context.Context;
+import hu.virgo.selenium.framework.debug.DebugDataStore;
 
 import org.junit.Rule;
 import org.junit.rules.TestWatcher;

@@ -1,4 +1,4 @@
-package hu.virgo.selenium.debug;
+package hu.virgo.selenium.framework.debug;
 
 import java.util.HashMap;
 import java.util.Map;
