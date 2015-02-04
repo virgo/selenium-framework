@@ -22,6 +22,7 @@ public class JUnitTestTemplate {
 		protected void starting(Description description) {
 			driver = context.getNewDriver();
 			debugData = new DebugDataStore();
+			debugData.put("buildNumber", context.getBuildNumber());
 			utils = new Utils(driver);
 		}
 

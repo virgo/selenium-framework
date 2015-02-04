@@ -6,6 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
@@ -16,6 +19,7 @@ public class Context {
 	private String sutPropertiesFileName;
 	private Properties properties;
 	private Browser browser;
+	private String buildNumber;
 	public SystemUnderTest sut;
 
 	public Context() {
@@ -24,10 +28,15 @@ public class Context {
 
 		sut = initSut(properties);
 		browser = initBrowser(properties);
+		buildNumber = initBuildNumber();
 	}
 
 	public WebDriver getNewDriver() {
 		return browser.getNewDriver();
+	}
+
+	public String getBuildNumber() {
+		return buildNumber;
 	}
 
 	private Properties openFile(String fileName) {
@@ -79,5 +88,11 @@ public class Context {
 		browser.setWindowDimensions(windowWidth, windowHeigth);
 
 		return browser;
+	}
+
+	private String initBuildNumber() {
+		DateFormat iso8601 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
+		String defaultValue = "Build (" + iso8601.format(new Date()) + ")";
+		return System.getProperty("buildNumber", defaultValue);
 	}
 }
