@@ -6,9 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
@@ -95,8 +92,7 @@ public class Context {
 	}
 
 	private String initBuildNumber() {
-		DateFormat iso8601 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
-		String defaultValue = "Build (" + iso8601.format(new Date()) + ")";
+		String defaultValue = "SEL";
 		return System.getProperty("buildNumber", defaultValue);
 	}
 }
