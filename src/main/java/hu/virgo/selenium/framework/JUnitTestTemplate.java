@@ -55,11 +55,11 @@ public class JUnitTestTemplate {
 			File folder = new File(resultsFolder);
 			folder.mkdir();
 
-			File selScreenShoot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			File selScreenShot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 			File imageFile = new File(resultsFolder + File.separator + context.getBuildNumber() + time() + ".png");
 			try {
-				FileUtils.copyFile(selScreenShoot, imageFile);
-				debugData.put("screenShoot", imageFile.getCanonicalPath());
+				FileUtils.copyFile(selScreenShot, imageFile);
+				debugData.put("screenShot", imageFile.getCanonicalPath());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
