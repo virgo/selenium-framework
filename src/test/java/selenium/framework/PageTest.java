@@ -5,14 +5,12 @@ import hu.virgo.selenium.framework.page.Page;
 import hu.virgo.selenium.framework.page.verify.ElementVerifier;
 import hu.virgo.selenium.framework.page.verify.PageVerificationException;
 
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-@Ignore("can not run tests with selenium dependency on Travis-CI")
 public class PageTest extends JUnitTestTemplate {
 
 	@Rule
