@@ -7,7 +7,7 @@ before_install:
   - "sh -e /etc/init.d/xvfb start"
   - "git clone -b travis `git config --get remote.origin.url` target/travis"
 
-script: "mvn deploy --settings target/travis/travis-settings.xml"
+script: "mvn deploy --settings target/travis/settings.xml"
   
 env:
   global:
