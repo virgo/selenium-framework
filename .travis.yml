@@ -6,10 +6,10 @@ before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
   - "git clone -b travis `git config --get remote.origin.url` target/travis"
-  - "echo $GPG_SYMMETRIC_PASS | gpg secret.key.gpg"
-  - "echo $GPG_SYMMETRIC_PASS | gpg public.key.gpg"
-  - "gpg --import public.key"
-  - "gpg --allow-secret-key-import --import secret.key"
+  - "echo $GPG_SYMMETRIC_PASS | gpg target/travis/secret.key.gpg"
+  - "echo $GPG_SYMMETRIC_PASS | gpg target/travis/public.key.gpg"
+  - "gpg --import target/travis/public.key"
+  - "gpg --allow-secret-key-import --import target/travis/secret.key"
 
 script: "mvn deploy --settings target/travis/settings.xml"
   
