@@ -24,3 +24,6 @@ Add these lines to your project's pom.xml
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
+	
+### Demo porject
+[https://github.com/virgo/selenium-framework-demo](https://github.com/virgo/selenium-framework-demo)
