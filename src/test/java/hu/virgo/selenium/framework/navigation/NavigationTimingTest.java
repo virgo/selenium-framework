@@ -19,7 +19,7 @@ public class NavigationTimingTest extends JUnitTestTemplate {
 
     @Test
     public void testResponseEndedInMillis() throws Exception {
-        assertThat(navTiming.responseEndedInMillis(), greaterThan(100L));
+        assertThat(navTiming.responseEndedInMillis(), greaterThan(0L));
     }
 
     @Test
