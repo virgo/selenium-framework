@@ -3,7 +3,6 @@ package hu.virgo.selenium.framework.navigation;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -13,13 +12,15 @@ import java.util.Map;
 public class NavigationTiming {
 
     private static final String SCRIPT = "var performance = window.performance || window.webkitPerformance || window.mozPerformance || window.msPerformance || {}; var timings = performance.timing || {}; return timings;";
-    private JavascriptExecutor js;
-    private Map<String, Object> timings;
+    private final Map<String, Object> timings;
 
     public NavigationTiming(WebDriver driver) {
-        this.js = (JavascriptExecutor) driver;
-        this.timings = new HashMap<>();
-        this.timings = (Map<String, Object>) js.executeScript(SCRIPT);
+        final JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        @SuppressWarnings("unchecked")
+        final Map<String, Object> result =  (Map<String, Object>) js.executeScript(SCRIPT);
+
+        this.timings = result;
     }
 
     public long responseEndedInMillis() {
@@ -35,8 +36,8 @@ public class NavigationTiming {
     }
 
     private long millisBetweenNavigationStartAndEvent(String eventName) {
-        long start = Long.parseLong(String.valueOf(timings.get("navigationStart")));
-        long end = Long.parseLong(String.valueOf(timings.get(eventName)));
+        long start = ((Number)timings.get("navigationStart")).longValue();
+        long end = ((Number)timings.get(eventName)).longValue();
         return end - start;
     }
 }
