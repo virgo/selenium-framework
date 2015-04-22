@@ -63,6 +63,8 @@ public class Context {
 
 	private Browser initBrowser(Properties properties) {
 		String browserType = properties.getProperty("browser");
+		String browserVersion = properties.getProperty("version");
+		String platform = properties.getProperty("platform");
 		String hubStr = properties.getProperty("browser.hub");
 		String firefoxProfile = properties.getProperty("browser.firefoxProfilePath");
 		boolean windowMaximize = Boolean.parseBoolean(properties.getProperty("browser.windows.maximize", "false"));
@@ -74,7 +76,11 @@ public class Context {
 		if (hubStr != null) {
 			try {
 				URL hub = new URL(hubStr);
-				browser = new Browser(browserType, hub);
+				if (browserVersion!=null && platform!= null ){
+					browser = new Browser(browserType, hub, browserVersion, platform);
+				} else {
+					browser = new Browser(browserType, hub);	
+				}
 			} catch (MalformedURLException e) {
 				throw new IllegalArgumentException(e);
 			}
