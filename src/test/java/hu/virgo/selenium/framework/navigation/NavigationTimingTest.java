@@ -1,11 +1,12 @@
 package hu.virgo.selenium.framework.navigation;
 
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.junit.Assert.assertThat;
 import hu.virgo.selenium.framework.JUnitTestTemplate;
+
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.hamcrest.Matchers.greaterThan;
-import static org.junit.Assert.assertThat;
 
 public class NavigationTimingTest extends JUnitTestTemplate {
 
@@ -39,6 +40,6 @@ public class NavigationTimingTest extends JUnitTestTemplate {
         long completed = navTiming.completePageLoadTimeInMillis();
 
         assertThat(completed, greaterThan(responseEnded));
-        assertThat(completed, greaterThan(domCompletes));
+        assertThat(completed, greaterThanOrEqualTo(domCompletes));
     }
 }
